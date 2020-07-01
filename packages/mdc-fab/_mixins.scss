@@ -29,6 +29,7 @@
 @use "@material/rtl/mixins" as rtl-mixins;
 @use "@material/shape/mixins" as shape-mixins;
 @use "@material/shape/functions" as shape-functions;
+@use "@material/theme/custom-properties";
 @use "@material/theme/functions" as theme-functions;
 @use "@material/theme/mixins" as theme-mixins;
 @use "@material/touch-target/mixins" as touch-target-mixins;
@@ -213,21 +214,138 @@ $ripple-target: '.mdc-fab__ripple';
   // Offsets the outer label padding by deducting it from icon padding.
   .mdc-fab__icon {
     @include feature-targeting-mixins.targets($feat-structure) {
-      @include rtl-mixins.reflexive-property(
-        margin,
-        $icon-padding - $label-padding,
-        $icon-padding
-      );
+      @include extended-icon-padding_($icon-padding, $label-padding);
     }
   }
 
   // For Extended FAB with text label followed by icon.
   .mdc-fab__label + .mdc-fab__icon {
     @include feature-targeting-mixins.targets($feat-structure) {
+      @include extended-icon-padding_(
+        $icon-padding,
+        $label-padding,
+        $is-icon-on-right: true
+      );
+    }
+  }
+}
+
+@mixin extended-icon-padding_(
+  $icon-padding,
+  $label-padding,
+  $is-icon-on-right: false
+) {
+  $is-icon-cp: custom-properties.is-custom-prop($icon-padding);
+  $is-label-cp: custom-properties.is-custom-prop($label-padding);
+
+  $icon-fallback: null;
+  $icon-var: null;
+
+  $label-fallback: null;
+  $label-var: null;
+
+  @if $is-icon-cp {
+    $icon-fallback: custom-properties.get-fallback($icon-padding);
+    $icon-var: custom-properties.create-var($icon-padding);
+  }
+
+  @if $is-label-cp {
+    $label-fallback: custom-properties.get-fallback($label-padding);
+    $label-var: custom-properties.create-var($label-padding);
+  }
+
+  @if $is-icon-on-right {
+    @if $is-icon-cp and $is-label-cp {
+      @include rtl-mixins.reflexive-property(
+        margin,
+        $icon-fallback,
+        $icon-fallback - $label-fallback
+      );
+
+      /* @alternate */
+      @include rtl-mixins.reflexive-property(
+        margin,
+        $icon-var,
+        calc(#{$icon-var} - #{$label-var})
+      );
+    } @else if $is-icon-cp {
+      @include rtl-mixins.reflexive-property(
+        margin,
+        $icon-fallback,
+        $icon-fallback - $label-padding
+      );
+
+      /* @alternate */
+      @include rtl-mixins.reflexive-property(
+        margin,
+        $icon-var,
+        calc(#{$icon-var} - #{$label-padding})
+      );
+    } @else if $is-label-cp {
+      @include rtl-mixins.reflexive-property(
+        margin,
+        $icon-padding,
+        $icon-padding - $label-fallback
+      );
+
+      /* @alternate */
+      @include rtl-mixins.reflexive-property(
+        margin,
+        $icon-padding,
+        calc(#{$icon-padding} - #{$label-var})
+      );
+    } @else {
       @include rtl-mixins.reflexive-property(
         margin,
         $icon-padding,
         $icon-padding - $label-padding
+      );
+    }
+  } @else {
+    @if $is-icon-cp and $is-label-cp {
+      @include rtl-mixins.reflexive-property(
+        margin,
+        $icon-fallback - $label-fallback,
+        $icon-fallback
+      );
+
+      /* @alternate */
+      @include rtl-mixins.reflexive-property(
+        margin,
+        calc(#{$icon-var} - #{$label-var}),
+        $icon-var
+      );
+    } @else if $is-icon-cp {
+      @include rtl-mixins.reflexive-property(
+        margin,
+        $icon-fallback - $label-padding,
+        $icon-fallback
+      );
+
+      /* @alternate */
+      @include rtl-mixins.reflexive-property(
+        margin,
+        calc(#{$icon-var} - #{$label-padding}),
+        $icon-var
+      );
+    } @else if $is-label-cp {
+      @include rtl-mixins.reflexive-property(
+        margin,
+        $icon-padding - $label-fallback,
+        $icon-padding
+      );
+
+      /* @alternate */
+      @include rtl-mixins.reflexive-property(
+        margin,
+        calc(#{$icon-padding} - #{$label-var}),
+        $icon-padding
+      );
+    } @else {
+      @include rtl-mixins.reflexive-property(
+        margin,
+        $icon-padding - $label-padding,
+        $icon-padding
       );
     }
   }
@@ -240,7 +358,15 @@ $ripple-target: '.mdc-fab__ripple';
   $feat-structure: feature-targeting-functions.create-target($query, structure);
 
   @include feature-targeting-mixins.targets($feat-structure) {
-    padding: 0 $label-padding;
+    @if custom-properties.is-custom-prop($label-padding) {
+      padding-top: 0;
+      padding-bottom: 0;
+
+      @include theme-mixins.property(padding-left, $label-padding);
+      @include theme-mixins.property(padding-right, $label-padding);
+    } @else {
+      padding: 0 $label-padding;
+    }
   }
 }
 
