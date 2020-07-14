@@ -3,6 +3,58 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/material-components/material-components-web/compare/v7.0.0...v8.0.0) (2020-07-14)
+
+
+### Bug Fixes
+
+* **chip-set:** crash when only item is removed ([a653b68](https://github.com/material-components/material-components-web/commit/a653b68118e823ae30b1f47f87a4a8e5e69d9186))
+* **circular-progress:** Default all variables ([430fd02](https://github.com/material-components/material-components-web/commit/430fd025b07b3e15dd699620fbbfca75f74632a3))
+* **data-table:** Add noflip annotation to header cell text align ([843f636](https://github.com/material-components/material-components-web/commit/843f636c047b5371cd31b9ae4af76a7ec494b446))
+* **data-table:** Fix icon misalignment in sort icon button when sorted down ([610c26c](https://github.com/material-components/material-components-web/commit/610c26c4a1c7928fec0e8d63be3bd76cb7ff76a0))
+* **data-table:** Set progress indicator height to table body offset height ([c678a9d](https://github.com/material-components/material-components-web/commit/c678a9d34a3f694511f292c7a62e68749721b63c))
+* **mdc-dialog:** second dialog `data-mdc-dialog-initial-focus` doesn't work ([a0ec7e2](https://github.com/material-components/material-components-web/commit/a0ec7e25d0ba26c2e85d5576e6af5e5d65b301a3))
+* **select:** do not emit change event when same value selected twice ([e07a708](https://github.com/material-components/material-components-web/commit/e07a7084134b6bbfb1d31a00e410b9d133f28863))
+* **select:** revert 2fed2c1 that delegates to list for single selection logic ([38197b4](https://github.com/material-components/material-components-web/commit/38197b4434959cc8b47124233003c14d9c4a0fbf))
+* **shape:** remove deprecated functions ([e2ea4a9](https://github.com/material-components/material-components-web/commit/e2ea4a99e1930ac4981f22a2b919bdbd31e75a95))
+* **snackbar:** remove use of [@at-root](https://github.com/at-root) ([98d0296](https://github.com/material-components/material-components-web/commit/98d02962b5f1edd9f541f19198dc3d1992720ea3))
+* **textfield:** remove fullwidth variant ([69a35e8](https://github.com/material-components/material-components-web/commit/69a35e80ceadb5ef9ffae87345eefbd80b383f51))
+* **theme:** property() mixin not working with theme key strings ([c1fec42](https://github.com/material-components/material-components-web/commit/c1fec424677fcb77dfc966ff1805d601a103fa30)), closes [#6158](https://github.com/material-components/material-components-web/issues/6158)
+
+
+### Features
+
+* **data-table:** Add progress indicator / loading feature to data table ([4497ace](https://github.com/material-components/material-components-web/commit/4497acef8fd636b6ceef3cf055f664c92465e965))
+* **data-table:** Added support for sticky header row in data table ([599b8c3](https://github.com/material-components/material-components-web/commit/599b8c3191a888e3debd94ad4934f741c5fb6e23))
+* **menu-surface:** Add transition to height for menu resizing animation. ([1e7cb61](https://github.com/material-components/material-components-web/commit/1e7cb61989c95f9b86de3b1f6edb1773c12dfc97))
+* **ripple:** Add will-change opt-out param ([e590b37](https://github.com/material-components/material-components-web/commit/e590b376bf20bde50e6f6b62339c0bac2703ccf0))
+* **segmented-button:** add adapters and foundations ([#6165](https://github.com/material-components/material-components-web/issues/6165)) ([6ed717d](https://github.com/material-components/material-components-web/commit/6ed717dddf5f62dd5bfc621388ae07471775612f))
+* **segmented-button:** Add new package for segmented button ([#6073](https://github.com/material-components/material-components-web/issues/6073)) ([d561860](https://github.com/material-components/material-components-web/commit/d5618602a8ef45a1fdf753c3598afc5e1cadc95b))
+* **segmented-button:** Added foundation business logic ([#6198](https://github.com/material-components/material-components-web/issues/6198)) ([e6e2301](https://github.com/material-components/material-components-web/commit/e6e23019d567802c13d0bd6559a35291c48abc91))
+* add custom property support for select, textfield, and notched outline ([ec23858](https://github.com/material-components/material-components-web/commit/ec2385881f93b75641db661038aae439b4c217d1))
+* **snackbar:** Update stacked layout to add an additional 8px on the label's right padding ([521afaf](https://github.com/material-components/material-components-web/commit/521afaf6e3086285b040c06fc3dbc92f20dc9b06))
+* **tooltip:** Add tooltip component into MDC catalog. ([b9394dc](https://github.com/material-components/material-components-web/commit/b9394dc5da7db3b60497cf81aa5f26a5758d9b37))
+* **tooltip:** Center align tooltip label text. ([5dac1f6](https://github.com/material-components/material-components-web/commit/5dac1f624606fc92682a4266ffd68bea21e57069))
+
+
+### Reverts
+
+* "Include tooltip directory for future copybara syncs." ([#6185](https://github.com/material-components/material-components-web/issues/6185)) ([b0c456d](https://github.com/material-components/material-components-web/commit/b0c456d330f31bc890c54d114de1d56ac23fee9f))
+
+
+### BREAKING CHANGES
+
+* **snackbar:** The right padding of the label for the `mdc-snackbar--stacked` variant will now have an additional 8px
+
+PiperOrigin-RevId: 319021332
+* **data-table:** New adapter method replacing `getTableBodyHeight()` => `getTableHeaderHeight()` and changed return types of this method.
+
+PiperOrigin-RevId: 318845959
+
+
+
+
+
 # [7.0.0](https://github.com/material-components/material-components-web/compare/v6.0.0...v7.0.0) (2020-06-23)
 
 
